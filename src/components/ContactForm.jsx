@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
 
 class ContactForm extends Component {
+  // setam starea initiala a componentei
   state = {
     name: '',
     number: '',
   };
 
+  // handler - pt a actualiza "state" (pt a re-renderiza) cu
+  // valorile introduse in campurile formularului
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
+  // trimitere formular
   handleSubmit = event => {
+    //   impiedicare reincarcare formular la trimiterea datelor
     event.preventDefault();
 
+    //destructuram starea componentei pt a obține valorile curente
+    // ale câmpurilor name și number
     const { name, number } = this.state;
+
+    // adaugare contact
     this.props.onAddContact(name, number);
 
-    // Resetăm formularul după adăugarea contactului
+    // Resetare formularul după adăugarea contactului
     this.setState({ name: '', number: '' });
   };
 
@@ -33,7 +42,6 @@ class ContactForm extends Component {
             name="name"
             value={name}
             onChange={this.handleChange}
-            pattern="^[a-zA-Z]+(([' -][a-zA-Z ])?[a-zA-Z]*)*$"
             title="Name may contain only letters, apostrophe, dash, and spaces."
             required
           />
@@ -46,7 +54,6 @@ class ContactForm extends Component {
             name="number"
             value={number}
             onChange={this.handleChange}
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />

@@ -13,7 +13,7 @@ class App extends Component {
   handleAddContact = (name, number) => {
     const { contacts } = this.state;
 
-    // Verificăm dacă numele contactului deja există în agenda
+    // Verific dacă numele contactului deja exista în agenda
     if (
       contacts.some(
         contact => contact.name.toLowerCase() === name.toLowerCase()
